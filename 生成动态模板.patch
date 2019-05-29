@@ -1,0 +1,81 @@
+Index: aigou_common_parent/aigou_common_interface/src/main/java/cn/ipanda/aigou/client/PageStaticClient.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- aigou_common_parent/aigou_common_interface/src/main/java/cn/ipanda/aigou/client/PageStaticClient.java	(date 1557823552633)
++++ aigou_common_parent/aigou_common_interface/src/main/java/cn/ipanda/aigou/client/PageStaticClient.java	(date 1557823552633)
+@@ -0,0 +1,28 @@
++package cn.ipanda.aigou.client;
++import org.springframework.cloud.openfeign.FeignClient;
++import org.springframework.web.bind.annotation.RequestBody;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RequestMethod;
++
++import java.util.Map;
++
++/**
++ * 页面静态客户端
++ *
++ * @Author: Panda
++ * @Description:
++ * @Date: Administrator  * @param null :  16:40  * @return : null 2019/5/14
++ */
++@FeignClient(value = "COMMON-PRIVODER", fallbackFactory = PageStaticClientFactory.class)
++@RequestMapping("/common")
++public interface PageStaticClient {
++    /**
++     *  生成动态模板
++     *  根据给定数据，和制定的模板！最终生成一个HTML的页面！
++     * @Author: Panda
++     * @Description:
++     * @Date: Administrator  * @param null :  16:42  * @return : null 2019/5/14
++     */
++    @RequestMapping(value = "/page",method = RequestMethod.POST)
++    void getPageStatic(@RequestBody Map<String,Object> map);
++}
+\ No newline at end of file
+Index: aigou_common_parent/aigou_common_interface/src/main/java/cn/ipanda/aigou/client/PageStaticClientFactory.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- aigou_common_parent/aigou_common_interface/src/main/java/cn/ipanda/aigou/client/PageStaticClientFactory.java	(date 1557823759595)
++++ aigou_common_parent/aigou_common_interface/src/main/java/cn/ipanda/aigou/client/PageStaticClientFactory.java	(date 1557823759595)
+@@ -0,0 +1,22 @@
++package cn.ipanda.aigou.client;
++import feign.hystrix.FallbackFactory;
++import org.springframework.stereotype.Component;
++import java.util.Map;
++/**
++ * @Author: Panda
++ * @Description: 
++ * @Date: Administrator  * @param null :  16:49  * @return : null 2019/5/14 
++ */
++@Component
++public class PageStaticClientFactory implements FallbackFactory<PageStaticClient> {
++    @Override
++    public PageStaticClient create(Throwable cause) {
++        return new PageStaticClient() {
++            @Override
++            public void getPageStatic(Map<String, Object> map) {
++                
++            }
++        };
++    }
++}
++
+Index: aigou_product_parent/aigou_product_service_8002/src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- aigou_product_parent/aigou_product_service_8002/src/main/resources/application.yml	(revision 340c0af85222d862d8b66f13d8d7073d2f69b32b)
++++ aigou_product_parent/aigou_product_service_8002/src/main/resources/application.yml	(date 1557821419504)
+@@ -16,4 +16,4 @@
+     service-url:
+       defaultZone: http://localhost:7001/eureka
+   instance:
+-    prefer-ip-address: true
+\ No newline at end of file
++    prefer-ip-address: true

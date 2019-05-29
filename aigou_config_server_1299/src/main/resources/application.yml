@@ -1,0 +1,23 @@
+server:
+  port: 1299
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: aigou-config-server
+  cloud:
+    config:
+      server:
+        git:
+          #uri: https://github.com/pandawjmb/aigou_config.git  #git文件地址成功！
+          uri: https://github.com/pandawjmb/aigou.git  #git文件地址成功！
+          #uri: https://github.com/pandawjmb/aigou/aigou_config.git  #git文件地址失败！
+          #uri: https://github.com/pandawjmb/aigou/tree/master/aigou_config.git  #git文件地址失败！
+          username: pandaxswjmb@outlook.com
+          password: Pandawan264717
+          search-paths: /**
+      label: master

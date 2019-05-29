@@ -1,0 +1,8 @@
+#配置本地的配置中心文件地址和github上的相关信息
+spring:
+  cloud:
+    config:
+          uri: http://127.0.0.1:1299  #git文件地址
+          label: master #分支
+          name: application-plat-service #github上面的名称
+          profile: test #环境

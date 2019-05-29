@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: microservice-zuul-gateway
+server:
+  port: 9527
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true
+zuul:
+  routes:
+    aigouEmployee.serviceId: employee-provider        #login登录服务路由employee-provider
+    aigouEmployee.path: /employee/**
+    aigouProduct.serviceId: aigou-product             #产品的服务路由aigou-product
+    aigouProduct.path: /product/**
+    aigouCommon.serviceId: common-privoder            #产品的服务路由aigou-product
+    aigouCommon.path: /common/**
+  ignored-services: "*"                               #忽略直接使用服务名访问
+  prefix: /aigou                                       #访问前缀

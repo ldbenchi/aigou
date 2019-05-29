@@ -1,0 +1,9 @@
+package cn.ipanda.aigou.query;
+import cn.ipanda.aigou.query.BaseQuery;
+/**
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public class ${table.entityName}Query extends BaseQuery{
+}

@@ -1,0 +1,23 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: AIGOU-PRODUCT
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/aigou_product?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+mybatis-plus:
+  mapper-locations: classpath:cn/ipanda/aigou/mapper/*Mapper.xml      #aigou的映射扫描所有的mapper
+  type-aliases-package: cn.ipanda.aigou.domain,cn.ipanda.aigou.query
+  # 配置slq打印日志
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+      #别名的配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    prefer-ip-address: true

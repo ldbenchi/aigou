@@ -1,0 +1,14 @@
+server:
+  port: 8003
+  max-http-header-size: 4048576 #加上不报此错！java.lang.IllegalArgumentException: Request header is too large
+spring:
+  application:
+    name: COMMON-PRIVODER
+eureka:
+  instance:
+    hostname: localhsot
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+

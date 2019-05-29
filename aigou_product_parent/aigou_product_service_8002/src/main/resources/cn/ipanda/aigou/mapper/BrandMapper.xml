@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ipanda.aigou.mapper.BrandMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.ipanda.aigou.domain.Brand">
+        <id column="id" property="id"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="name" property="name"/>
+        <result column="englishName" property="englishName"/>
+        <result column="firstLetter" property="firstLetter"/>
+        <result column="description" property="description"/>
+        <result column="product_type_id" property="productTypeId"/>
+        <result column="sortIndex" property="sortIndex"/>
+        <result column="logo" property="logo"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, createTime, updateTime, name, englishName, firstLetter, description, product_type_id AS productTypeId, sortIndex, logo
+    </sql>
+
+    <!--long queryPageCount(BrandQuery query);-->
+    <select id="queryPageCount" resultType="long" parameterType="BrandQuery">
+        SELECT
+          COUNT(*)
+        FROM
+          t_brand brand
+        LEFT JOIN
+          t_product_type product_type
+        ON
+          brand.product_type_id = product_type.id
+        <include refid="whereSql"/>
+    </select>
+
+    <!--List<Brand> brands = brandMapper.queryPage(page, query);-->
+    <select id="queryPage" resultMap="brandMap" parameterType="BrandQuery">
+        SELECT
+          brand.*, product_type.id product_typeid,
+          product_type.name product_typename
+        FROM
+          t_brand brand
+        LEFT JOIN
+          t_product_type product_type
+        ON
+          brand.product_type_id = product_type.id
+          <include refid="whereSql"/>
+        LIMIT #{start},#{rows}
+    </select>
+
+    <!--where 条件的抽取BaseQuery类 private String keyword;关键字-->
+    <sql id="whereSql">
+        <where>
+            <if test="keyword!=null and keyword!=''">
+                AND
+                ( brand.name LIKE concat("%",#{keyword},"%")
+                OR brand.englishName LIKE concat("%",#{keyword},"%")
+                OR brand.description LIKE concat("%",#{keyword},"%")
+                )
+            </if>
+        </where>
+    </sql>
+    <resultMap id="brandMap" type="Brand">
+        <!--封装基本属性-->
+        <id column="id" property="id"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="name" property="name"/>
+        <result column="englishName" property="englishName"/>
+        <result column="firstLetter" property="firstLetter"/>
+        <result column="description" property="description"/>
+        <result column="product_type_id" property="productTypeId"/>
+        <result column="sortIndex" property="sortIndex"/>
+        <result column="logo" property="logo"/>
+        <!--再封装关联属性
+         private ProductType productType;
+        -->
+        <association property="productType" javaType="ProductType">
+            <id column="product_typeid" property="id"/>
+            <result column="product_typename" property="name"/>
+        </association>
+    </resultMap>
+</mapper>
