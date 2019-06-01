@@ -14,10 +14,10 @@ spring:
       server:
         git:
           #uri: https://github.com/pandawjmb/aigou_config.git  #git文件地址成功！
-          uri: https://github.com/pandawjmb/aigou.git  #git文件地址成功！
+          uri: https://github.com/ldbenchi/aigou.git #git文件地址成功！
           #uri: https://github.com/pandawjmb/aigou/aigou_config.git  #git文件地址失败！
           #uri: https://github.com/pandawjmb/aigou/tree/master/aigou_config.git  #git文件地址失败！
-          username: pandaxswjmb@outlook.com
-          password: Pandawan264717
+          username: ldbenchi@outlook.com
+          password: ld361022
           search-paths: /**
       label: master

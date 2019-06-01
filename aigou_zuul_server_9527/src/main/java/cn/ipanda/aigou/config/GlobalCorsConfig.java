@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
 @Configuration
 public class GlobalCorsConfig {
     @Bean
@@ -29,7 +30,10 @@ public class GlobalCorsConfig {
         UrlBasedCorsConfigurationSource configSource = new
                 UrlBasedCorsConfigurationSource();
         configSource.registerCorsConfiguration("/**", config);
+
         //3.返回新的CorsFilter.
         return new CorsFilter(configSource);
+
     }
+
 }
