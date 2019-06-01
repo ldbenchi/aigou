@@ -11,5 +11,8 @@ public class ZuulApplication_9527 {
       SpringApplication.run(ZuulApplication_9527.class);
 
       System.out.println("冬冬冬冬冬冬");
+
+
+
    }
 }
