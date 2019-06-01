@@ -10,7 +10,7 @@ public class ZuulApplication_9527 {
    public static void main(String[] args) {
       SpringApplication.run(ZuulApplication_9527.class);
 
-      System.out.println("冬----冬----");
+      System.out.println("-----冬----冬----");
 
 
 
